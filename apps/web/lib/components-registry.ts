@@ -4,5 +4,6 @@ export const componentsRegistry = [
   { slug: "card", name: "Card" },
   { slug: "dialog", name: "Dialog" },
   { slug: "alert", name: "Alert"},
+  { slug: "card", name: "Card"},
   // add one entry per component you build
 ] as const
