@@ -4,7 +4,7 @@ export default function TablePreview() {
   return (
     <div className="p-10">
       <h1 className="mb-6 text-lg font-semibold">Table</h1>
-      <Table>Example Table</Table>
+      <h2>Example Table</h2>
     </div>
   )
 }
