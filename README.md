@@ -1,6 +1,6 @@
 # build-ui_component_library
 
-A personal shadcn/ui component library built as a monorepo, where every component — official shadcn components and custom ones — gets its own isolated preview route (e.g. `/button`, `/card`, `/message`) so it can be viewed and tested on its own.
+A personal shadcn/ui component library built as a monorepo, where every component and custom ones, gets there own isolated preview route (e.g. `/button`, `/card`, `/message`) so it can be viewed and tested on their own.
 
 ## Tech Stack
 
