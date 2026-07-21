@@ -1,18 +1,37 @@
+import { Sparkles } from "lucide-react"
 import { Badge } from "@workspace/ui/components/badge"
-import { cn } from "../../../../../packages/ui/src/lib/utils";
-
+const variants = [
+  "default",
+  "secondary",
+  "destructive",
+  "outline",
+  "ghost",
+  "link",
+] as const
 export default function BadgePreview() {
   return (
-    <div className="p-10">
-      <h1 className={cn('mb-6', 'text-lg', 'font-semibold')}>Badge</h1>
-      <div className={cn('flex', 'flex-wrap', 'gap-4')}>
-      <Badge>Example Badge</Badge>
-      <Badge variant="secondary">Secondary Badge</Badge>
-      <Badge variant="destructive">Destructive Badge</Badge>
-      <Badge variant="outline">Outline Badge</Badge>
-      <Badge variant="ghost">Ghost Badge</Badge>
-      <Badge variant="link">Link Badge</Badge>
-      </div>
+    <div className="space-y-8 p-10">
+      <h1 className="mb-6 text-lg font-semibold">Badge</h1>
+      <section className="space-y-3">
+        <p className="text-sm text-muted-foreground">
+          Every variant, icons, links, and invalid state
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {variants.map((variant) => (
+            <Badge key={variant} variant={variant}>
+              {variant === "destructive"
+                ? "Action required"
+                : `${variant} status`}
+            </Badge>
+          ))}
+          <Badge>
+            <Sparkles data-icon="inline-start" />
+            New release
+          </Badge>
+          <Badge render={<a href="#release-notes" />}>Read release notes</Badge>
+          <Badge aria-invalid>Invalid subscription</Badge>
+        </div>
+      </section>
     </div>
   )
 }
