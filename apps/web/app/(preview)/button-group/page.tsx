@@ -85,7 +85,7 @@ export default function ButtonGroupPreview() {
       {/* 4. Vertical Button Group */}
       <section className="space-y-3">
         <p className="text-sm font-medium text-muted-foreground">
-          Vertical Orientation (orientation="vertical")
+          Vertical Orientation (orientation=vertical)
         </p>
         <ButtonGroup orientation="vertical">
           <Button variant="outline" size="sm">
