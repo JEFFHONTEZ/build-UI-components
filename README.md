@@ -1,6 +1,6 @@
 # build-ui_component_library
 
-A personal shadcn/ui component library built as a monorepo, where every component and custom ones, gets there own isolated preview route (e.g. `/button`, `/card`, `/message`) so it can be viewed and tested on their own.
+A personal shadcn/ui component library built as a monorepo, where every component — official shadcn components and custom ones — gets its own isolated preview route (e.g. `/button`, `/card`, `/message`) so it can be viewed and tested on its own.
 
 ## Tech Stack
 
@@ -124,6 +124,84 @@ This scans `packages/ui/src/components/`, creates a `page.tsx` + registry entry 
 1. Hand-write the file in `packages/ui/src/components/custom/<name>.tsx`.
 2. Create its preview route: `apps/web/app/(preview)/<name>/page.tsx`.
 3. Register it in `components-registry.ts`.
+
+## Adding ReactBits Components (Backgrounds, Effects)
+
+[ReactBits](https://reactbits.dev) is configured as a third-party shadcn registry for visual effects and animated backgrounds (e.g. Ferrofluid) that aren't part of the standard shadcn component set. It's registered in `apps/web/components.json`:
+
+```json
+"registries": {
+  "@react-bits": "https://reactbits.dev/r/{name}.json"
+}
+```
+
+### 1. Install the component
+
+From `apps/web`:
+
+```bash
+cd apps/web
+npx shadcn@latest add @react-bits/<ComponentName>
+```
+
+This installs to `apps/web/components/<ComponentName>.tsx` by default — **not** `packages/ui` — because ReactBits registry items aren't typed as `registry:ui`, so they don't follow the `ui` alias. Relocate it manually so it's shared across the monorepo like every other component:
+
+### 2. Move it into `packages/ui`
+
+```bash
+git mv apps/web/components/<ComponentName>.tsx packages/ui/src/components/backgrounds/<component-name>.tsx
+```
+
+```
+packages/ui/src/components/
+  ui/           ← shadcn primitives
+  custom/       ← hand-built compositions
+  backgrounds/  ← ReactBits visual/background effects
+```
+
+### 3. Add `"use client"`
+
+ReactBits components typically use hooks, refs, canvas, or WebGL (`ogl`, `three`, etc.) directly. Add this as the first line of the file if it's missing:
+
+```tsx
+"use client"
+```
+
+### 4. Move any new dependencies into `packages/ui`
+
+The install may have added packages (e.g. `ogl`) to `apps/web/package.json`. Since the component now lives in `packages/ui`, its dependencies should too:
+
+```bash
+cd packages/ui
+npm install <dependency-name>
+cd ../../apps/web
+npm uninstall <dependency-name>
+```
+
+### 5. Expose it via `packages/ui/package.json` exports
+
+Add an export entry matching the pattern used for other components:
+
+```json
+"./components/backgrounds/<component-name>": "./src/components/backgrounds/<component-name>.tsx"
+```
+
+### 6. Create the preview route and register it
+
+```
+apps/web/app/(preview)/<component-name>/page.tsx
+```
+
+```ts
+// apps/web/lib/components-registry.ts
+{ slug: "<component-name>", name: "<ComponentName>" },
+```
+
+Follow the same [Preview Page Conventions](#preview-page-conventions) as any other component — cover every prop/variant the component exposes (colors, speed, direction, paused state, etc.), not just the default.
+
+### Note on `components.json`
+
+Only one `aliases` object and one `registries` object should exist in `components.json`. If a CLI run ever produces a duplicate key block, manually merge them — JSON silently keeps only the last duplicate key, which can mask a broken alias.
 
 ## Preview Page Conventions
 
