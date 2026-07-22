@@ -1,4 +1,3 @@
-// apps/web/app/(preview)/ferrofluid/page.tsx
 import Ferrofluid from "@workspace/ui/components/backgrounds/ferrofluid"
 
 export default function FerrofluidPreview() {

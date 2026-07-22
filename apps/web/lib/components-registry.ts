@@ -58,4 +58,5 @@ export const componentsRegistry = [
   { slug: "toggle-group", name: "Toggle Group" },
   { slug: "tooltip", name: "Tooltip" },
   { slug: "ferrofluid", name: "Ferrofluid" },
+  { slug: "lightfall", name: "Lightfall" },
 ] as const

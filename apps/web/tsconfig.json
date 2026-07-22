@@ -18,7 +18,9 @@
     "**/*.tsx",
     "**/*.mts",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "../../packages/ui/src/components/backgrounds/ferrofluid.tsx",    "../../packages/uiS/src/components/backgrounds/ferrofluid.tsx",
+    "../../packages/ui/src/components/backgrounds/lightfall.tsx",     "../../packages/ui/src/components/backgrounds/lightfall.tsx",
   ],
   "exclude": ["node_modules"]
 }

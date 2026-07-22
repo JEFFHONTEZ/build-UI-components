@@ -39,8 +39,8 @@
     "./postcss.config": "./postcss.config.mjs",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
+    "./hooks/*": "./src/hooks/*.ts",
     "./components/backgrounds/ferrofluid": "./src/components/backgrounds/ferrofluid.tsx",
-    "./hooks/*": "./src/hooks/*.ts"
-
+    "./components/backgrounds/lightfall": "./src/components/backgrounds/lightfall.tsx"
   }
 }
